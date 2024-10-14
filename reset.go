@@ -1,9 +1,16 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
+	"os"
+)
 
 func (cfg *apiConfig) middlewareMetricsReset(w http.ResponseWriter, r *http.Request) {
-	cfg.fileserverHits.Store(0)
+	platform := os.Getenv("PLATFORM")
+	if platform != "dev" {
+		w.WriteHeader(http.StatusForbidden)
+		return
+	}
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Hits reset to 0"))
+	cfg.db.DeleteUsers(r.Context())
 }
