@@ -29,6 +29,6 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 		w.WriteHeader(500)
 		return
 	}
-	w.WriteHeader(200)
+	w.WriteHeader(code)
 	w.Write(dat)
 }
