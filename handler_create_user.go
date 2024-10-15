@@ -31,3 +31,5 @@ func (cfg *apiConfig) handlerCreateUser(w http.ResponseWriter, r *http.Request) 
 		Email:     user.Email,
 	})
 }
+
+// curl -X POST localhost:8080/api/users -H 'Content-Type: application/json' -d '{"email":"rjniem@gmail.com"}'
